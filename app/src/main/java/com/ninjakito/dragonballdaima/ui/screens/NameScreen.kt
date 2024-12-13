@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -27,17 +28,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ninjakito.dragonballdaima.R
 import com.ninjakito.dragonballdaima.ui.LogoDragonBall
+import com.ninjakito.dragonballdaima.ui.NameViewModel
 
 @Composable
-fun NameScreen(onShowClick: (String) -> Unit) {
-    var name by remember { mutableStateOf("") }
+fun NameScreen(viewModel: NameViewModel, onShowClick: (String) -> Unit) {
+    val name by viewModel.name.observeAsState("")
+
     Column (modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
         Spacer(modifier = Modifier.weight(1f))
         LogoDragonBall()
         Spacer(modifier = Modifier.weight(2f))
         TextField(
             value = name,
-            onValueChange = { name = it },
+            onValueChange = { viewModel.onChangeName(it) },
             maxLines = 1,
             placeholder = { Text(text = stringResource(R.string.name_tf)) }
         )
@@ -56,5 +59,5 @@ fun NameScreen(onShowClick: (String) -> Unit) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun NameScreenPreview() {
-    NameScreen() {  }
+    NameScreen(viewModel = NameViewModel()) {  }
 }

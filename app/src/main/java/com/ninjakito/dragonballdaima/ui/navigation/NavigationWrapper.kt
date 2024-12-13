@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ninjakito.dragonballdaima.R
+import com.ninjakito.dragonballdaima.ui.NameViewModel
 import com.ninjakito.dragonballdaima.ui.screens.LaunchScreen
 import com.ninjakito.dragonballdaima.ui.screens.NameScreen
 import com.ninjakito.dragonballdaima.ui.screens.ResultScreen
@@ -32,7 +33,7 @@ fun NavigationWrapper() {
         // Navigate to NameScreen
         composable("name/{character}") { backStackEntry ->
             val character = backStackEntry.arguments?.getString("character") ?: R.drawable.goku.toString()
-            NameScreen { name: String ->
+            NameScreen(viewModel = NameViewModel()) { name: String ->
                 navController.navigate("result/$character/$name")
             }
         }

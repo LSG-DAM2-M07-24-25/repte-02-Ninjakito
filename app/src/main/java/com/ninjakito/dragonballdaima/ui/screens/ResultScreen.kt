@@ -39,7 +39,7 @@ fun ResultScreen(name: String, character: Int, onClickBack: () -> Unit) {
             modifier = Modifier.size(250.dp)
         )
         Spacer(modifier = Modifier.weight(0.2f))
-        Text(text = name.trim(), fontWeight = FontWeight.Bold, fontSize = 50.sp)
+        Text(text = name, fontWeight = FontWeight.Bold, fontSize = 50.sp)
         Spacer(modifier = Modifier.weight(1.3f))
         Button(
             onClick = onClickBack,

@@ -60,4 +60,7 @@ dependencies {
     // Navigation
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.navigation.compose)
+
+    // ViewModel
+    implementation(libs.androidx.runtime.livedata)
 }
