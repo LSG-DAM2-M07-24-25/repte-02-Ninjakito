@@ -16,10 +16,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -33,9 +36,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ninjakito.dragonballdaima.R
 import com.ninjakito.dragonballdaima.ui.LogoDragonBall
+import com.ninjakito.dragonballdaima.ui.viewmodels.SelectorViewModel
 
 @Composable
-fun SelectScreen(onClickNext: (Int) -> Unit) {
+fun SelectScreen(viewModel: SelectorViewModel, onClickNext: (Int) -> Unit) {
+    val characters by viewModel.characters.observeAsState()
+    val selectedCharacter by viewModel.selectedCharacter.observeAsState()
+
     Column (modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
         Spacer(modifier = Modifier.weight(1f))
         LogoDragonBall()
@@ -48,40 +55,17 @@ fun SelectScreen(onClickNext: (Int) -> Unit) {
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            item {
-                CharacterButton(character = stringResource(R.string.gomah_img), image = R.drawable.gomah) { character ->
-                    onClickNext(character)
-                }
-            }
-            item {
-                CharacterButton(character = stringResource(R.string.goku_img), image = R.drawable.goku, selected = true) { character ->
-                    onClickNext(character)
-                }
-            }
-            item {
-                CharacterButton(character = stringResource(R.string.vegeta_img), image = R.drawable.vegeta) { character ->
-                    onClickNext(character)
-                }
-            }
-            item {
-                CharacterButton(character = stringResource(R.string.piccolo_img), image = R.drawable.piccolo) { character ->
-                    onClickNext(character)
-                }
-            }
-            item {
-                CharacterButton(character = stringResource(R.string.supreme_img), image = R.drawable.supreme) { character ->
-                    onClickNext(character)
-                }
-            }
-            item {
-                CharacterButton(character = stringResource(R.string.masked_majin_img), image = R.drawable.masked_majin) { character ->
-                    onClickNext(character)
+            items(characters!!) { character ->
+                CharacterButton(character = stringResource(character.name), image = character.image, selected = character.selected) { characterID ->
+                    viewModel.selectCharacter(characterID)
+                    Log.d("SELECTED", "Selected character: $selectedCharacter")
+                    Log.d("SELECTED", "Characters: $characters")
                 }
             }
         }
         Spacer(modifier = Modifier.weight(1f))
         Button(
-            onClick = { onClickNext(R.drawable.goku) },
+            onClick = { onClickNext(viewModel.selectedCharacter.value?.image ?: R.drawable.goku) },
             modifier = Modifier.width(250.dp).height(40.dp),
             shape = RoundedCornerShape(10)
         ) {
@@ -112,5 +96,5 @@ fun CharacterButton(character: String, image: Int, selected: Boolean = false, on
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun SelectScreenPreview() {
-    SelectScreen {  }
+    SelectScreen(viewModel = SelectorViewModel()) {  }
 }

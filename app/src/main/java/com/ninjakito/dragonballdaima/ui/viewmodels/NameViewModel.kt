@@ -1,4 +1,4 @@
-package com.ninjakito.dragonballdaima.ui
+package com.ninjakito.dragonballdaima.ui.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -5,12 +5,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ninjakito.dragonballdaima.R
-import com.ninjakito.dragonballdaima.ui.NameViewModel
+import com.ninjakito.dragonballdaima.ui.viewmodels.NameViewModel
 import com.ninjakito.dragonballdaima.ui.screens.LaunchScreen
 import com.ninjakito.dragonballdaima.ui.screens.NameScreen
 import com.ninjakito.dragonballdaima.ui.screens.ResultScreen
-import com.ninjakito.dragonballdaima.ui.screens.ResultScreenPreview
 import com.ninjakito.dragonballdaima.ui.screens.SelectScreen
+import com.ninjakito.dragonballdaima.ui.viewmodels.SelectorViewModel
 
 @Composable
 fun NavigationWrapper() {
@@ -25,7 +25,7 @@ fun NavigationWrapper() {
 
         // Navigate to SelectorScreen
         composable("select") {
-            SelectScreen { character: Int ->
+            SelectScreen(viewModel = SelectorViewModel()) { character: Int ->
                 navController.navigate("name/$character")
             }
         }
