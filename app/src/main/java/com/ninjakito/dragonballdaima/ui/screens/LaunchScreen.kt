@@ -32,7 +32,7 @@ fun LaunchScreen(onClickStart: () -> Unit) {
         Spacer(modifier = Modifier.weight(3f))
         Image(
             painter = painterResource(id = R.drawable.dragonball_daima_logo),
-            contentDescription = "Dragon Ball Daima",
+            contentDescription = stringResource(id = R.string.dragon_ball_img),
             modifier = Modifier.fillMaxWidth(),
             contentScale = ContentScale.FillWidth
         )

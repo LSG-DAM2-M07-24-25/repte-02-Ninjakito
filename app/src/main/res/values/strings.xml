@@ -5,4 +5,11 @@
     <string name="show_btn">Mostrar</string>
     <string name="name_tf">Nom del personatge</string>
     <string name="back_btn">Tornar</string>
+    <string name="dragon_ball_img">Dragon Ball Daima Logo</string>
+    <string name="goku_img">Goku</string>
+    <string name="gomah_img">Gomah</string>
+    <string name="masked_majin_img">Masked Majin</string>
+    <string name="piccolo_img">Piccolo</string>
+    <string name="supreme_img">Supreme</string>
+    <string name="vegeta_img">Vegeta</string>
 </resources>
