@@ -32,17 +32,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ninjakito.dragonballdaima.R
+import com.ninjakito.dragonballdaima.ui.LogoDragonBall
 
 @Composable
-fun SelectScreen(onClickNext: (String) -> Unit) {
+fun SelectScreen(onClickNext: (Int) -> Unit) {
     Column (modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
         Spacer(modifier = Modifier.weight(1f))
-        Image(
-            painter = painterResource(id = R.drawable.dragonball_daima_logo),
-            contentDescription = stringResource(id = R.string.dragon_ball_img),
-            modifier = Modifier.width(320.dp),
-            contentScale = ContentScale.FillWidth
-        )
+        LogoDragonBall()
         Spacer(modifier = Modifier.weight(0.5f))
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
@@ -53,39 +49,39 @@ fun SelectScreen(onClickNext: (String) -> Unit) {
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             item {
-                CharacterButton(character = stringResource(R.string.gomah_img), image = painterResource(R.drawable.gomah)) {
-                    character -> Log.d("SELECTOR", character)
+                CharacterButton(character = stringResource(R.string.gomah_img), image = R.drawable.gomah) { character ->
+                    onClickNext(character)
                 }
             }
             item {
-                CharacterButton(character = stringResource(R.string.goku_img), image = painterResource(R.drawable.goku), selected = true) {
-                    character -> Log.d("SELECTOR", character)
+                CharacterButton(character = stringResource(R.string.goku_img), image = R.drawable.goku, selected = true) { character ->
+                    onClickNext(character)
                 }
             }
             item {
-                CharacterButton(character = stringResource(R.string.vegeta_img), image = painterResource(R.drawable.vegeta)) {
-                    character -> Log.d("SELECTOR", character)
+                CharacterButton(character = stringResource(R.string.vegeta_img), image = R.drawable.vegeta) { character ->
+                    onClickNext(character)
                 }
             }
             item {
-                CharacterButton(character = stringResource(R.string.piccolo_img), image = painterResource(R.drawable.piccolo)) {
-                    character -> Log.d("SELECTOR", character)
+                CharacterButton(character = stringResource(R.string.piccolo_img), image = R.drawable.piccolo) { character ->
+                    onClickNext(character)
                 }
             }
             item {
-                CharacterButton(character = stringResource(R.string.supreme_img), image = painterResource(R.drawable.supreme)) {
-                    character -> Log.d("SELECTOR", character)
+                CharacterButton(character = stringResource(R.string.supreme_img), image = R.drawable.supreme) { character ->
+                    onClickNext(character)
                 }
             }
             item {
-                CharacterButton(character = stringResource(R.string.masked_majin_img), image = painterResource(R.drawable.masked_majin)) {
-                    character -> Log.d("SELECTOR", character)
+                CharacterButton(character = stringResource(R.string.masked_majin_img), image = R.drawable.masked_majin) { character ->
+                    onClickNext(character)
                 }
             }
         }
         Spacer(modifier = Modifier.weight(1f))
         Button(
-            onClick = { onClickNext("goku") },
+            onClick = { onClickNext(R.drawable.goku) },
             modifier = Modifier.width(250.dp).height(40.dp),
             shape = RoundedCornerShape(10)
         ) {
@@ -96,7 +92,7 @@ fun SelectScreen(onClickNext: (String) -> Unit) {
 }
 
 @Composable
-fun CharacterButton(character: String, image: Painter, selected: Boolean = false, onClickCharacter: (String) -> Unit) {
+fun CharacterButton(character: String, image: Int, selected: Boolean = false, onClickCharacter: (Int) -> Unit) {
     var borderSize = -1.dp
 
     if (selected) {
@@ -104,12 +100,12 @@ fun CharacterButton(character: String, image: Painter, selected: Boolean = false
     }
 
     Image (
-        painter = image,
+        painter = painterResource(image),
         contentDescription = character,
         modifier = Modifier
             .size(150.dp)
             .border(border = BorderStroke(borderSize, Color.Black))
-            .clickable { onClickCharacter(character) },
+            .clickable { onClickCharacter(image) },
     )
 }
 
