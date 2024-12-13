@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">DragonBallDaima</string>
+    <string name="app_name">Dragon Ball Daima</string>
+    <string name="enter_btn">Entrar</string>
+    <string name="continue_btn">Continuar</string>
+    <string name="show_btn">Mostrar</string>
+    <string name="name_tf">Nom del personatge</string>
+    <string name="back_btn">Tornar</string>
 </resources>
