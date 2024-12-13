@@ -42,7 +42,7 @@ fun NavigationWrapper() {
             val character = backStackEntry.arguments?.getString("character") ?: R.drawable.goku.toString()
             val name = backStackEntry.arguments?.getString("name") ?: "Adrià"
             ResultScreen(name = name, character = character.toIntOrNull() ?: R.drawable.goku) {
-                navController.clearBackStack("launch")
+                navController.popBackStack("launch", false)
                 navController.navigate("select")
             }
         }
